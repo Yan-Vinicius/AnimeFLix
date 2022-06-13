@@ -41,18 +41,44 @@ def lista_animes(request):
 
     try:
 
-        lista_fav = Profile.objects.get(id=usuario.id).animes_favoritos.all()
+        lista_fav = Profile.objects.get(user=usuario).animes_favoritos.all()
 
     except Profile.DoesNotExist:
 
         Profile.objects.create(user=usuario)
-
-        lista_fav = Profile.objects.get(id=usuario.id).animes_favoritos.all()
+        lista_fav = Profile.objects.get(user=usuario).animes_favoritos.all()
 
 
     dict_animes = {"animes": todos_animes, "animes_favoritos": lista_fav}
     return render(request, 'index.html', dict_animes)
 
 
-def create_user(request):
-    return
+@login_required(login_url='/login/')
+def add_anime(request):
+
+    usuario = request.user
+    todos_animes = Anime.objects.all()
+    dict_animes = {"animes": todos_animes}
+
+
+    return render(request, 'add_anime_fav.html', dict_animes)
+
+
+@login_required(login_url='/login/')
+def submit_add_anime(request):
+
+    if request.POST:
+
+        usuario = request.user
+        animes_favoritos_usuario = Profile.objects.get(user=usuario)
+        lista_animes_selecionados = request.POST.getlist("checks[]")
+        for i in lista_animes_selecionados:
+
+            animes = Anime.objects.filter(id=int(i))
+
+            if animes:
+                animes_favoritos_usuario.animes_favoritos.add(i)
+            else:
+                redirect('/')
+
+    return redirect('/')

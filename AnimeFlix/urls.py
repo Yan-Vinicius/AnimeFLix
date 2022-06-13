@@ -27,5 +27,7 @@ urlpatterns = [
     #Indica um POST (com barra indica um GET)
     path('login/submit', views.submit_login),
     path('logout/', views.logout_user),
+    path('add/', views.add_anime),
+    path('add/submit', views.submit_add_anime)
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
