@@ -3,7 +3,6 @@ from core.models import Anime, Profile
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.contrib.auth.models import User
 
 # Create your views here.
 def login_user(request):
@@ -72,6 +71,7 @@ def submit_add_anime(request):
         usuario = request.user
         animes_favoritos_usuario = Profile.objects.get(user=usuario)
         lista_animes_selecionados = request.POST.getlist("checks[]")
+
         for i in lista_animes_selecionados:
 
             animes = Anime.objects.filter(id=int(i))
@@ -80,5 +80,35 @@ def submit_add_anime(request):
                 animes_favoritos_usuario.animes_favoritos.add(i)
             else:
                 redirect('/')
+
+    return redirect('/')
+
+@login_required(login_url='/login/')
+def delete_anime(request):
+    usuario = request.user
+
+    try:
+
+        lista_animes_user = Profile.objects.get(user=usuario).animes_favoritos.all()
+
+    except:
+
+        return redirect('/')
+
+    dict_animes = {"animes": lista_animes_user}
+
+    return render(request, 'delete_anime_fav.html', dict_animes)
+
+@login_required(login_url='/login/')
+def submit_delete_anime(request):
+
+    usuario = request.user
+    lista_animes_selecionados = request.POST.getlist("checks[]")
+
+    for i in lista_animes_selecionados:
+
+        Profile.objects.get(user=usuario).animes_favoritos.remove(int(i))
+
+
 
     return redirect('/')

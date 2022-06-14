@@ -28,6 +28,8 @@ urlpatterns = [
     path('login/submit', views.submit_login),
     path('logout/', views.logout_user),
     path('add/', views.add_anime),
-    path('add/submit', views.submit_add_anime)
+    path('add/submit', views.submit_add_anime),
+    path('delete/', views.delete_anime),
+    path('delete/submit', views.submit_delete_anime)
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
