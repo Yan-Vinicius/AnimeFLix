@@ -23,7 +23,9 @@ from core import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.lista_animes),
-    path("login/", views.login_user),
+    path('login/', views.login_user),
+    path('login/create_user/', views.create_user),
+    path('login/create_user/submit', views.submit_create_user),
     #Indica um POST (com barra indica um GET)
     path('login/submit', views.submit_login),
     path('logout/', views.logout_user),

@@ -3,12 +3,38 @@ from core.models import Anime, Profile
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 # Create your views here.
+def create_user(request):
+    return render(request, 'create_user.html')
+
+def submit_create_user(request):
+
+    if request.POST:
+
+        username = request.POST.get('Username')
+        user_email = request.POST.get('Email')
+        password = request.POST.get('Password')
+
+        if User.objects.filter(username=username).first():
+            messages.error(request, "Usuário já existe")
+
+        else:
+
+            user = User.objects.create_user(username, user_email, password)
+            user.save()
+
+            login(request, user)
+
+            return redirect('/')
+        return redirect('/')
+
 def login_user(request):
     return render(request, 'login.html')
 
 def submit_login(request):
+
     if request.POST:
         username = request.POST.get('username')
         password = request.POST.get('password')

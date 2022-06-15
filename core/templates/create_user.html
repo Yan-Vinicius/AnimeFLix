@@ -17,16 +17,13 @@
     <main>
         <div align="center">
             <div class="login">
-            <h1>Login</h1>
+            <h1>Criar conta</h1>
             <form action="submit" method="POST"> {% csrf_token %}
-                <input type="text" name="username" placeholder="Username" required="required" />
-                <input type="password" name="password" placeholder="Password" required="required" />
+                <input type="text" name="Username" placeholder="Username" required="required" />
+                <input type="email" name="Email" placeholder="Email" required="required" />
+                <input type="password" name="Password" placeholder="Password" required="required" />
                 <button type="submit" class="btn btn-primary btn-block btn-large">Entrar</button>
             </form>
-            <a href="/login/create_user/" style="text-decoration: none">
-            <button class="btn btn-primary btn-block btn-large" style="margin-top: 10px;">Criar conta</button>
-            </a>
-
 
             {% for message in messages %}
 
