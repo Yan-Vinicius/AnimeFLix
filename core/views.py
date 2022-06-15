@@ -97,7 +97,7 @@ def delete_anime(request):
 
     dict_animes = {"animes": lista_animes_user}
 
-    return render(request, 'delete_anime_fav.html', dict_animes)
+    return render(request, 'remover_anime_fav.html', dict_animes)
 
 @login_required(login_url='/login/')
 def submit_delete_anime(request):
@@ -109,6 +109,17 @@ def submit_delete_anime(request):
 
         Profile.objects.get(user=usuario).animes_favoritos.remove(int(i))
 
-
-
     return redirect('/')
+
+
+@login_required(login_url='/login/')
+def info_anime(request):
+
+    usuario = request.user
+
+    id_anime = request.GET.get('id')
+    dados = {}
+    if id_anime:
+        dados['anime'] = Anime.objects.get(id=id_anime)
+
+    return render(request,'info_anime.html', dados)

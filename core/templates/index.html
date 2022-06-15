@@ -20,7 +20,6 @@
         <div class="container">
             <h2 class="logo">AnimeFlix</h2>
             <nav>
-                <a href="/login/" style="font-size: 25px;">Login</a>
                 <a href="/login/" style="font-size: 25px;">Sair</a>
 
             </nav>
@@ -46,14 +45,16 @@
 
     <div class="animes-favoritos">
         <h3 class="titulo" style="font-size: 40px; padding:10px;">Seus animes favoritos</h3>
-        <a href="add/"><button role="button" class="botao"><i class="fa-solid fa-play"></i>Adicionar animes aos favoritos</button></a>
-        <a href="delete/"><button role="button" class="botao"><i class="fa-solid fa-play"></i>Deletar animes favoritos</button></a>
+        <a href="add/"><button role="button" class="botao"><i class="fa-solid fa-plus"></i>Adicionar animes aos favoritos</button></a>
+        <a href="delete/"><button role="button" class="botao"><i class="fa-solid fa-minus"></i>Excluir animes favoritos</button></a>
     </div>
 
     <div class="carrousel-animes">
         <div class="owl-carousel responsive">
             {% for favoritos in animes_favoritos %}
-            <div class="item"><img class="box-filme" src="{{ favoritos.imagem.url }}"></div>
+
+            <div class="item"><label style="font-family: 'Trebuchet MS', Arial, sans-serif; font-size: 25px;">{{favoritos.titulo}}</label>
+                <a href="info/?id={{favoritos.id}}"><img class="box-filme" src="{{ favoritos.imagem.url }}"></a></div>
             {%endfor%}
         </div>
     </div>
@@ -63,7 +64,9 @@
     <div class="carrousel-animes">
         <div class="owl-carousel owl-theme">
             {% for anime in animes %}
-            <div class="item"><img class="box-filme" src="{{ anime.imagem.url }}"></div>
+
+            <div class="item"><label style="font-family: 'Trebuchet MS', Arial, sans-serif; font-size: 25px;">{{anime.titulo}}</label>
+                <a href="info/?id={{anime.id}}"><img class="box-filme" src="{{ anime.imagem.url }}"></a></div>
             {%endfor%}
         </div>                                                                                                                                  
     </div>

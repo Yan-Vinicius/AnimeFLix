@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'app/style/main.css' %}">
+    <link rel="stylesheet" href="{% static 'app/style/responsive.css' %}">
+
+    <title>Informação</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h2><a href="/" class="logo">AnimeFlix</a></h2>
+            <nav>
+                <a href="/login/" style="font-size: 25px;">Sair</a>
+
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="anime-principal" style=" font-size: 16px;
+                background:linear-gradient(rgba(0, 0, 0, .50), rgba(0, 0, 0, .40) 100%), url({{anime.imagem.url}});
+                height: 100%;
+
+                background-size: cover;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-content: flex-start;">
+            <div class="container">
+                <h3 class="titulo">{{anime.titulo}}</h3>
+                <p class="descricao" style="font-size: 25px;">{{anime.descricao}}</p>
+
+                <div class="botoes">
+                    <button role="button" class="botao"><i class="fa-solid fa-play"></i>Assistir agora</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://kit.fontawesome.com/c208982d6f.js" crossorigin="anonymous"></script>
+    <script src="{% static 'app/js/owl/jquery.min.js' %}"></script>
+    <script src="{% static 'app/js/owl/setup.js' %}"></script>
+
+</body>
+</html>
